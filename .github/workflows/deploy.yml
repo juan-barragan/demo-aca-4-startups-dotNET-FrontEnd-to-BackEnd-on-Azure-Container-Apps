@@ -1,8 +1,10 @@
+name: Deploy
+
 on:
-  workflow_dispatch:
   push:
     branches:
-      - deploy
+      - deploy # Déclenche uniquement sur la branche 'deploy'
+  workflow_dispatch: # Permet le déclenchement manuel
 
 env:
   AZURE_ENV_NAME: stpademo
