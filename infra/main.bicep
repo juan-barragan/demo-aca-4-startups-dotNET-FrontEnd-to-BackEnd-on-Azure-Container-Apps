@@ -90,7 +90,7 @@ module store 'app/store.bicep' = {
   name: 'store'
   scope: resourceGroup
   params: {
-    name: 'store'
+    name: '${abbrs.appContainerApps}store'
     location: location
     tags: tags
     exists: storeAppExists
@@ -108,7 +108,7 @@ module inventory 'app/inventory.bicep' = {
   name: 'inventory'
   scope: resourceGroup
   params: {
-    name: 'inventory'
+    name: '${abbrs.appContainerApps}inventory'
     location: location
     tags: tags
     exists: inventoryAppExists
@@ -124,7 +124,7 @@ module products 'app/products.bicep' = {
   name: 'products'
   scope: resourceGroup
   params: {
-    name: 'products'
+    name: '${abbrs.appContainerApps}products'
     location: location
     tags: tags
     exists: productsAppExists
