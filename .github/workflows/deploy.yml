@@ -51,7 +51,7 @@ jobs:
         env:
           AZURE_ENV_NAME: ${{ env.AZURE_ENV_NAME }}
           AZURE_LOCATION: ${{ env.REGION }}
-          AZURE_RESOURCE_GROUP_NAME: ${{ env.RESOURCE_GROUP_NAME: }}
+          AZURE_RESOURCE_GROUP_NAME: ${{ env.RESOURCE_GROUP_NAME }}
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Deploy changes to Azure Container Apps
