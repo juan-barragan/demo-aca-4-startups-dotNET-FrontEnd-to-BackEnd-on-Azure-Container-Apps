@@ -1,19 +1,11 @@
+name: Deploy
+
 on:
-  workflow_dispatch:
   push:
     branches:
-      - deploy
-
-env:
-
-  AZURE_ENV_NAME: stpademo
-
-  # alphanumeric string under 14 characters
-  RESOURCE_GROUP_NAME: rg-demo-stpaaca-1803-1310
-
-  # specify your preferred region
-  REGION: france
-
+      - deploy # Déclenche uniquement sur la branche 'deploy'
+  workflow_dispatch: # Permet le déclenchement manuel
+  
 permissions:
   id-token: write
   contents: read
@@ -25,9 +17,10 @@ jobs:
       image: mcr.microsoft.com/azure-dev-cli-apps:latest
     env:
         AZURE_CREDENTIALS: ${{ secrets.AzureSPN }}
-        AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
-        AZURE_LOCATION: ${{ vars.REGION }}
         AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        AZURE_ENV_NAME: stpademo
+        AZURE_LOCATION: francecentral
+        RESOURCE_GROUP_NAME: rg-demo-stpaaca-1803-1310
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -52,13 +45,14 @@ jobs:
       - name: Provision Azure Resources
         run: azd provision --no-prompt
         env:
-          AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
-          AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+          AZURE_ENV_NAME: ${{ env.AZURE_ENV_NAME }}
+          AZURE_LOCATION: ${{ env.AZURE_LOCATION }}
+          AZURE_RESOURCE_GROUP_NAME: ${{ env.RESOURCE_GROUP_NAME }}
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Deploy changes to Azure Container Apps
         run: azd deploy --no-prompt
         env:
-          AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
-          AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+          AZURE_ENV_NAME: ${{ env.AZURE_ENV_NAME }}
+          AZURE_LOCATION: ${{ env.AZURE_LOCATION }}
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
