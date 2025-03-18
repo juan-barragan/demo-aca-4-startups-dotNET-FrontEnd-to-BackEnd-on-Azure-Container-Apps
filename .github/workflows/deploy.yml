@@ -1,13 +1,16 @@
+name: Deploy
+
 on:
   push:
     branches:
       - deploy # Déclenche uniquement sur la branche 'deploy'
   workflow_dispatch: # Permet le déclenchement manuel
 
+# Section env globale
 env:
-  AZURE_ENV_NAME: stpademo
-  REGION: france
-  RESOURCE_GROUP_NAME: rg-demo-stpaaca-1803-1310
+  AZURE_ENV_NAME: "stpademo"
+  REGION: "france"
+  RESOURCE_GROUP_NAME: "rg-demo-stpaaca-1803-1310"
   
 permissions:
   id-token: write
