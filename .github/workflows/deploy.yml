@@ -30,6 +30,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Update azd to the latest version
+        run: |
+          curl -fsSL https://aka.ms/install-azd.sh | bash
+
       - name: Log in with Azure (Client Credentials)
         run: |
           $info = $Env:AZURE_CREDENTIALS | ConvertFrom-Json -AsHashtable;
