@@ -20,7 +20,7 @@ jobs:
         AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         AZURE_ENV_NAME: stpademo
         AZURE_LOCATION: francecentral
-        RESOURCE_GROUP_NAME: rg-demo-stpaaca-1803-1310
+        AZURE_RESOURCE_GROUP_NAME: rg-demo-stpaaca-1803-1310
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -47,7 +47,7 @@ jobs:
         env:
           AZURE_ENV_NAME: ${{ env.AZURE_ENV_NAME }}
           AZURE_LOCATION: ${{ env.AZURE_LOCATION }}
-          AZURE_RESOURCE_GROUP_NAME: ${{ env.RESOURCE_GROUP_NAME }}
+          AZURE_RESOURCE_GROUP_NAME: ${{ env.AZURE_RESOURCE_GROUP_NAME }}
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Deploy changes to Azure Container Apps
