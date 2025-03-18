@@ -7,10 +7,10 @@ on:
 env:
 
   # alphanumeric string under 14 characters
-  RESOURCE_GROUP_NAME: bradygstore02
+  RESOURCE_GROUP_NAME: rg-demo-stpaaca-1803-1310
 
   # specify your preferred region
-  REGION: westus
+  REGION: france
 
 permissions:
   id-token: write
