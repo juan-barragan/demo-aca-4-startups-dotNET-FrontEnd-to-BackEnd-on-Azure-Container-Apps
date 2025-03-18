@@ -28,7 +28,7 @@ var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: environmentName
+  name: resourceGroupName
   location: location
   tags: tags
 }
