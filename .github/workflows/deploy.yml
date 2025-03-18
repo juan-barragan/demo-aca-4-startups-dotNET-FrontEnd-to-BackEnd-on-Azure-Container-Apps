@@ -19,7 +19,7 @@ jobs:
         AZURE_CREDENTIALS: ${{ secrets.AzureSPN }}
         AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         AZURE_ENV_NAME: stpademo
-        AZURE_LOCATION: france
+        AZURE_LOCATION: francecentral
         RESOURCE_GROUP_NAME: rg-demo-stpaaca-1803-1310
     steps:
       - name: Checkout
