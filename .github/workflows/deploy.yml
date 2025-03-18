@@ -5,12 +5,6 @@ on:
     branches:
       - deploy # Déclenche uniquement sur la branche 'deploy'
   workflow_dispatch: # Permet le déclenchement manuel
-
-# Section env globale
-env:
-  AZURE_ENV_NAME: "stpademo"
-  REGION: "france"
-  RESOURCE_GROUP_NAME: "rg-demo-stpaaca-1803-1310"
   
 permissions:
   id-token: write
@@ -23,9 +17,10 @@ jobs:
       image: mcr.microsoft.com/azure-dev-cli-apps:latest
     env:
         AZURE_CREDENTIALS: ${{ secrets.AzureSPN }}
-        AZURE_ENV_NAME: ${{ env.AZURE_ENV_NAME }}
-        AZURE_LOCATION: ${{ env.REGION }}
         AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        AZURE_ENV_NAME: "stpademo"
+        AZURE_LOCATION: "france"
+        RESOURCE_GROUP_NAME: "rg-demo-stpaaca-1803-1310"
     steps:
       - name: Checkout
         uses: actions/checkout@v3
