@@ -6,7 +6,7 @@ on:
 
 env:
 
-  AZURE_ENV_NAME: StpaDemoEnvironnement
+  AZURE_ENV_NAME: stpademo
 
   # alphanumeric string under 14 characters
   RESOURCE_GROUP_NAME: rg-demo-stpaaca-1803-1310
@@ -25,7 +25,7 @@ jobs:
       image: mcr.microsoft.com/azure-dev-cli-apps:latest
     env:
         AZURE_CREDENTIALS: ${{ secrets.AzureSPN }}
-        AZURE_ENV_NAME: ${{ vars.RESOURCE_GROUP_NAME }}
+        AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
         AZURE_LOCATION: ${{ vars.REGION }}
         AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
     steps:
