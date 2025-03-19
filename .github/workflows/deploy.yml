@@ -19,7 +19,7 @@ jobs:
     env:
       AZURE_CREDENTIALS: ${{ secrets.AzureSPN }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      MY_RESOURCE_GROUP_NAME: rg-demogenaistudio17
+      AZURE_MY_RESOURCE_GROUP_NAME: rg-demogenaistudio17
       AZURE_ENV_NAME: stpademo3
       AZURE_LOCATION: francecentral
 
@@ -47,7 +47,7 @@ jobs:
       - name: Provision Azure Resources
         run: azd provision --no-prompt
         env:
-          AZURE_MY_RESOURCE_GROUP_NAME: ${{ env.MY_RESOURCE_GROUP_NAME }}
+          AZURE_MY_RESOURCE_GROUP_NAME: ${{ env.AZURE_MY_RESOURCE_GROUP_NAME }}
           AZURE_ENV_NAME: ${{ env.AZURE_ENV_NAME }}
           AZURE_LOCATION: ${{ env.AZURE_LOCATION }}
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
