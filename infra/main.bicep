@@ -1,7 +1,6 @@
 targetScope = 'subscription'
 
 @minLength(1)
-@maxLength(64)
 @description('Name of the environment that can be used as part of naming resource convention')
 param environmentName string
 
@@ -10,9 +9,8 @@ param environmentName string
 param location string
 
 @minLength(1)
-@maxLength(64)
 @description('Name of the resource group')
-param resourceGroupName string = 'defaultResourceGroupName'
+param resourceGroupName string = 'rg-testdefault02'
 
 @description('Specifies if the store app exists')
 param storeAppExists bool = false
@@ -28,7 +26,7 @@ var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: environmentName
+  name: resourceGroupName
   location: location
   tags: tags
 }
@@ -90,7 +88,7 @@ module store 'app/store.bicep' = {
   name: 'store'
   scope: resourceGroup
   params: {
-    name: 'store'
+    name: '${abbrs.appContainerApps}store'
     location: location
     tags: tags
     exists: storeAppExists
@@ -108,7 +106,7 @@ module inventory 'app/inventory.bicep' = {
   name: 'inventory'
   scope: resourceGroup
   params: {
-    name: 'inventory'
+    name: '${abbrs.appContainerApps}inventory'
     location: location
     tags: tags
     exists: inventoryAppExists
@@ -124,7 +122,7 @@ module products 'app/products.bicep' = {
   name: 'products'
   scope: resourceGroup
   params: {
-    name: 'products'
+    name: '${abbrs.appContainerApps}products'
     location: location
     tags: tags
     exists: productsAppExists

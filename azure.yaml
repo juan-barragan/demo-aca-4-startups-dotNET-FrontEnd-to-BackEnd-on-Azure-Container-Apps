@@ -4,12 +4,12 @@ name: dotnet-frontend-to-multiple-api-backends
 metadata:
   template: dotnet-frontend-to-multiple-api-backends@2.0.0
 parameters:
+  - name: resourceGroupName
+    value: 'rg-test01'
   - name: environmentName
     value: ${{ env.AZURE_ENV_NAME }}
   - name: location
     value: ${{ env.AZURE_LOCATION }}
-  - name: resourceGroupName
-    value: ${{ env.AZURE_RESOURCE_GROUP_NAME }}
 services:
   inventory:
     project: src/Store.InventoryApi
