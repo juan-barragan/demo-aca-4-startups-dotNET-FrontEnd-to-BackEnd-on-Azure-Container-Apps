@@ -8,10 +8,6 @@ param environmentName string
 @description('Primary location for all resources')
 param location string
 
-# @minLength(1)
-# @description('Name of the resource group')
-# param myresourceGroupName string
-
 @description('Specifies if the store app exists')
 param storeAppExists bool = false
 
