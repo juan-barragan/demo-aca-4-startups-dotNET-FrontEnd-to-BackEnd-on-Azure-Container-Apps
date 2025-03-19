@@ -10,7 +10,7 @@ parameters:
     value: ${{ env.AZURE_ENV_NAME }}
   - name: location
     value: ${{ env.AZURE_LOCATION }}
-  services:
+services:
   inventory:
     project: src/Store.InventoryApi
     dist: build
