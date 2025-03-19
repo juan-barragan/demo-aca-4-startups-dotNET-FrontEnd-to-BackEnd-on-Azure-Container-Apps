@@ -8,10 +8,6 @@ param environmentName string
 @description('Primary location for all resources')
 param location string
 
-@minLength(1)
-@description('Name of the resource group')
-param myresourceGroupName string
-
 @description('Specifies if the store app exists')
 param storeAppExists bool = false
 
@@ -26,7 +22,7 @@ var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: myresourceGroupName
+  name: environmentName
   location: location
   tags: tags
 }
