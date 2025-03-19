@@ -10,7 +10,7 @@ param location string
 
 @minLength(1)
 @description('Name of the resource group')
-param myresourceGroupName
+param myresourceGroupName string
 
 @description('Specifies if the store app exists')
 param storeAppExists bool = false
