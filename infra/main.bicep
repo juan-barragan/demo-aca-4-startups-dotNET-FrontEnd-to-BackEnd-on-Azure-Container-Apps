@@ -6,7 +6,7 @@ param environmentName string
 
 @minLength(1)
 @description('Resource Group Name')
-param myResourceGroupName string
+param environmentName2 string
 
 @minLength(1)
 @description('Primary location for all resources')
@@ -26,7 +26,7 @@ var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location, myResourceGroupName))
 
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: myResourceGroupName
+  name: environmentName2
   location: location
   tags: tags
 }
