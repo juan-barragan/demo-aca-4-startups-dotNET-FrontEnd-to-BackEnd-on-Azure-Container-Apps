@@ -8,6 +8,9 @@
         "location": {
             "value": "${AZURE_LOCATION}"
         },
+        "myResourceGroupName": {
+            "value": "${AZURE_MY_RESOURCE_GROUP_NAME}"
+        },
         "storeAppExists": {
             "value": "${SERVICE_STORE_RESOURCE_EXISTS=false}"
         },
