@@ -9,7 +9,7 @@ parameters:
   - name: location
     value: ${{ env.AZURE_LOCATION }}
   - name: resourceGroupName
-    value: rg-test-01
+    value: "rg-test-01"
 services:
   inventory:
     project: src/Store.InventoryApi
