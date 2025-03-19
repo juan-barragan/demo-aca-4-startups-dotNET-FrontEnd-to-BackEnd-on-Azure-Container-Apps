@@ -44,6 +44,9 @@ jobs:
         env:
           AZURE_CREDENTIALS: ${{ secrets.AzureSPN }}
 
+      - name: Print environment variables
+        run: env
+
       - name: Provision Azure Resources
         run: azd provision --no-prompt
         env:
