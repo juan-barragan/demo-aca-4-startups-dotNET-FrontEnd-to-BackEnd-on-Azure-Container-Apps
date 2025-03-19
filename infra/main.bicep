@@ -10,7 +10,7 @@ param location string
 
 @minLength(1)
 @description('Name of the resource group')
-param resourceGroupName string = 'rg-test-default02'
+param resourceGroupName string
 
 @description('Specifies if the store app exists')
 param storeAppExists bool = false
