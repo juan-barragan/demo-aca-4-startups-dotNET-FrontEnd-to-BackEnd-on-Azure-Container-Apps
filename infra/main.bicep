@@ -23,7 +23,7 @@ param productsAppExists bool = false
 
 var tags = { 'azd-env-name': environmentName }
 var abbrs = loadJsonContent('./abbreviations.json')
-var resourceToken = toLower(uniqueString(subscription().id, environmentName, location, myResourceGroupName))
+var resourceToken = toLower(uniqueString(subscription().id, environmentName, location, environmentName2))
 
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   name: environmentName2
