@@ -19,9 +19,8 @@ jobs:
     env:
       AZURE_CREDENTIALS: ${{ secrets.AzureSPN }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      AZURE_ENV_NAME: stpademo
-      AZURE_RESOURCE_GROUP_NAME: rg-demo-stpaaca
-      AZURE_LOCATION: westus
+      AZURE_ENV_NAME: stpademo3
+      AZURE_LOCATION: francecentral
 
     steps:
       - name: Checkout
@@ -44,12 +43,14 @@ jobs:
         env:
           AZURE_CREDENTIALS: ${{ secrets.AzureSPN }}
 
+      - name: Print environment variables
+        run: env
+
       - name: Provision Azure Resources
         run: azd provision --no-prompt
         env:
           AZURE_ENV_NAME: ${{ env.AZURE_ENV_NAME }}
           AZURE_LOCATION: ${{ env.AZURE_LOCATION }}
-          AZURE_RESOURCE_GROUP_NAME: ${{ env.AZURE_RESOURCE_GROUP_NAME }}
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Deploy changes to Azure Container Apps
