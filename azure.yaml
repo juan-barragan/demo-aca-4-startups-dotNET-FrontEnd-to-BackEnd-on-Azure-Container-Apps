@@ -4,8 +4,6 @@ name: dotnet-frontend-to-multiple-api-backends
 metadata:
   template: dotnet-frontend-to-multiple-api-backends@2.0.0
 parameters:
-  - name: myResourceGroupName
-    value: ${{ env.AZURE_MY_RESOURCE_GROUP_NAME }}
   - name: environmentName
     value: ${{ env.AZURE_ENV_NAME }}
   - name: location
