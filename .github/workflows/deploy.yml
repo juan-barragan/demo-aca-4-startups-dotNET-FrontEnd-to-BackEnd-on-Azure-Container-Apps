@@ -20,7 +20,7 @@ jobs:
       AZURE_CREDENTIALS: ${{ secrets.AzureSPN }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       AZURE_MY_RESOURCE_GROUP_NAME: rg-demoaca2
-      AZURE_ENV_NAME: stpademo2
+      AZURE_ENV_NAME: stpademo
       AZURE_LOCATION: francecentral
 
     steps:
@@ -58,6 +58,7 @@ jobs:
       - name: Deploy changes to Azure Container Apps
         run: azd deploy --no-prompt
         env:
+          AZURE_MY_RESOURCE_GROUP_NAME: ${{ env.AZURE_MY_RESOURCE_GROUP_NAME }}
           AZURE_ENV_NAME: ${{ env.AZURE_ENV_NAME }}
           AZURE_LOCATION: ${{ env.AZURE_LOCATION }}
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
