@@ -5,10 +5,6 @@ targetScope = 'subscription'
 param environmentName string
 
 @minLength(1)
-@description('Resource Group Name')
-param myResourceGroupName string
-
-@minLength(1)
 @description('Primary location for all resources')
 param location string
 
@@ -23,10 +19,11 @@ param productsAppExists bool = false
 
 var tags = { 'azd-env-name': environmentName }
 var abbrs = loadJsonContent('./abbreviations.json')
-var resourceToken = toLower(uniqueString(subscription().id, environmentName, location, myResourceGroupName))
+var timestamp = utcNow('yyyyMMddHHmmss')
+var resourceToken = toLower(uniqueString(subscription().id, environmentName, location, timestamp ))
 
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
-  name: myResourceGroupName
+  name: environmentName
   location: location
   tags: tags
 }
