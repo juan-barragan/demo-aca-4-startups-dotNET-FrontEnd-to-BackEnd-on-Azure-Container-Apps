@@ -19,7 +19,7 @@ jobs:
     env:
       AZURE_CREDENTIALS: ${{ secrets.AzureSPN }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      AZURE_ENV_NAME: stpademo
+      AZURE_ENV_NAME: stpademo2
       AZURE_LOCATION: francecentral
 
     steps:
