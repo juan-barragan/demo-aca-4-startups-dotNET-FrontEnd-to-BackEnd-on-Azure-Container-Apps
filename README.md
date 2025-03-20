@@ -90,40 +90,45 @@ Le moyen le plus simple de déployer le code est de faire un commit directement 
 
 ![Modifier le fichier de deploiement du workflow.](docs/media/edit-the-deploy-file.png)
 
-Fournissez un nom de groupe de ressources personnalisé pour l'application, puis validez la modification dans une nouvelle branche nommée deploy.
+Fournissez un nom d'environnement personnalisé qui sera utilisé pour le nom de `Resssource Group` Azure , puis validez la modification dans une nouvelle branche nommée `deploy`.
 
-Créer la branche de déploiement.
+![Créer la branche de déploiement.](docs/media/deploy.png)
 
-Une fois que vous aurez cliqué sur le bouton Propose changes, vous serez en mode "créer une pull request". Ne vous inquiétez pas de créer la pull request pour le moment, cliquez simplement sur l'onglet Actions, et vous verrez que le déploiement...
+Une fois que vous aurez cliqué sur le bouton `Propose changes`, vous serez en mode "creation d'un pull request". Ne vous inquiétez avec le `pull request` pour le moment, cliquez simplement sur l'onglet Actions, et vous verrez que le déploiement va démarrer...
 
-Déploiement démarré.
+![Déploiement démarré.](docs/media/deploy-started.png)
 
 Lorsque vous cliquez dans le workflow, vous verrez qu'il y a 3 phases que le CI/CD parcourra :
 
 provision - les ressources Azure seront créées pour héberger votre application.
+
 build - les différents projets .NET sont construits dans des conteneurs et publiés dans l'instance Azure Container Registry créée pendant la provision.
+
 deploy - une fois build terminé, les images sont dans ACR, donc les Azure Container Apps sont mises à jour pour héberger les images de conteneurs nouvellement publiées.
-Phases de déploiement.
 
-Après quelques minutes, les trois étapes du workflow seront terminées, et chaque boîte dans le diagramme du workflow reflétera le succès. Si quelque chose échoue, vous pouvez cliquer dans les étapes du processus individuel...
 
-Remarque : si vous voyez des échecs ou des problèmes, veuillez soumettre un problème afin que nous puissions mettre à jour l'exemple. De même, si vous avez des idées pour l'améliorer, n'hésitez pas à soumettre une pull request.
+![Phases de déploiement.](docs/media/cicd-phases.png)
 
-Déploiement réussi.
+Après quelques minutes, les trois étapes du workflow seront terminées, et chaque étape dans le diagramme du workflow affichera son état d'execution. Si quelque chose échoue, vous pouvez cliquer dans les étapes du processus pour examiner les détails.
 
-Avec les projets déployés sur Azure, vous pouvez maintenant tester l'application pour vous assurer qu'elle fonctionne.
+![Déploiement réussi.](docs/media/success.png)
 
-Essayer l'application dans Azure
+Avec les projets déployés sur `Azure Container Apps`, vous pouvez maintenant tester l'application pour vous assurer qu'elle fonctionne.
+
+## Tester l'application dans Azure
+
 Le processus CI/CD deploy crée une série de ressources dans votre abonnement Azure. Celles-ci sont principalement utilisées pour héberger le code du projet, mais il y a également quelques ressources supplémentaires qui aident avec...
 
-Resource	Type de ressource	Objectif
-storeai	Application Insights	Cela fournit des informations de télémétrie et de diagnostic pour surveiller les performances de l'application ou pour...
-store	Une Azure Container App qui héberge le code du frontend.	L'application store est l'application frontend de la boutique, exécutant un projet Blazor Server qui atteint les API back-end
-products	Une Azure Container App qui héberge le code pour une API minimale.	Cette API est une API activée par Swagger UI qui renvoie des noms et des identifiants de produits aux appelants.
-inventory	Une Azure Container App qui héberge le code pour une API minimale.	Cette API est une API activée par Swagger UI qui renvoie des quantités pour les identifiants de produits. Un client doit appeler les pr...
-storeenv	Un environnement Azure Container Apps	Cet environnement sert de méta-conteneur de mise en réseau pour toutes les instances de toutes les applications de conteneurs...
-storeacr	Un Azure Container Registry	C'est le registre de conteneurs dans lequel le processus CI/CD publie mes conteneurs d'application lorsque je...
-storelogs	Log Analytics Workspace	C'est là que je peux exécuter des requêtes Kusto personnalisées contre...
+| Resource  | Resource Type                                                | Purpose                                                      |
+| --------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| storeai   | Application Insights                                         | This provides telemetry and diagnostic information for when I want to monitor how the app is performing or for when things need troubleshooting. |
+| store     | An Azure Container App that houses the code for the front end. | The store app is the store's frontend app, running a Blazor Server project that reaches out to the backend APIs |
+| products  | An Azure Container App that houses the code for a minimal API. | This API is a Swagger UI-enabled API that hands back product names and IDs to callers. |
+| inventory | An Azure Container App that houses the code for a minimal API. | This API is a Swagger UI-enabled API that hands back quantities for product IDs. A client would need to call the `products` API first to get the product ID list, then use those product IDs as parameters to the `inventory` API to get the quantity of any particular item in inventory. |
+| storeenv  | An Azure Container Apps Environment                          | This environment serves as the networking meta-container for all of the instances of all of the container apps comprising the app. |
+| storeacr  | An Azure Container Registry                                  | This is the container registry into which the CI/CD process publishes my application containers when I commit code to the `deploy` branch. From this registry, the containers are pulled and loaded into Azure Container Apps. |
+| storelogs | Log Analytics Workspace                                      | This is where I can perform custom [Kusto](https://docs.microsoft.com/azure/data-explorer/kusto/query/) queries against the application telemetry, and time-sliced views of how the app is performing and scaling over time in the environment. |
+
 Les ressources sont montrées ici dans le portail Azure :
 
 Ressources dans le portail
