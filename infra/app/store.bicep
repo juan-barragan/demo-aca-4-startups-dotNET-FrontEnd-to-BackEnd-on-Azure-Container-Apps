@@ -26,7 +26,7 @@ module app '../core/host/container-app-upsert.bicep' = {
     exists: exists
     containerAppsEnvironmentName: containerAppsEnvironmentName
     containerRegistryName: containerRegistryName
-    containerMaxReplicas: 1
+    containerMaxReplicas: 30
     containerMinReplicas: 1
     env: [
       {
