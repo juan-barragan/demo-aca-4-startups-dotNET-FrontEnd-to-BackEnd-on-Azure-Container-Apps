@@ -19,8 +19,8 @@ jobs:
     env:
       AZURE_CREDENTIALS: ${{ secrets.AzureSPN }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      AZURE_ENV_NAME: stpademo3
-      AZURE_LOCATION: francecentral
+      AZURE_ENV_NAME: << YOUR ENV NAME >>    # Variable qui sera utilise pour la generation du nom du ressource group et pour tag des ressources
+      AZURE_LOCATION: << YOUR LOCATION >>    # Variable qui definie la region de deploiement ie francecentral westeu westus
 
     steps:
       - name: Checkout
