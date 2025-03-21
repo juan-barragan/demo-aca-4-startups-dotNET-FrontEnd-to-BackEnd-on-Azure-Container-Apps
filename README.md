@@ -98,7 +98,7 @@ Une fois que vous aurez cliqué sur le bouton `Propose changes`, vous serez en m
 
 ![Déploiement démarré.](docs/media/deploy-started.png)
 
-Lorsque vous cliquez dans le workflow, vous verrez qu'il y a 3 phases que le CI/CD parcourra :
+Lorsque vous cliquez dans le workflow, vous verrez qu'il y a les phases que le CI/CD parcourra :
 
 provision - les ressources Azure seront créées pour héberger votre application.
 
@@ -109,7 +109,7 @@ deploy - une fois build terminé, les images sont dans ACR, donc les Azure Conta
 
 ![Phases de déploiement.](docs/media/cicd-phases.png)
 
-Après quelques minutes, les trois étapes du workflow seront terminées, et chaque étape dans le diagramme du workflow affichera son état d'execution. Si quelque chose échoue, vous pouvez cliquer dans les étapes du processus pour examiner les détails.
+Après quelques minutes, les étapes du workflow seront terminées, et chaque étape dans le diagramme du workflow affichera son état d'execution. Si quelque chose échoue, vous pouvez cliquer dans les étapes du processus pour examiner les détails.
 
 ![Déploiement réussi.](docs/media/success.png)
 
