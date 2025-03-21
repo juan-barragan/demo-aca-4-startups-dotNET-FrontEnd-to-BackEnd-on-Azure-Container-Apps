@@ -1,56 +1,62 @@
-# ASP.NET Core Front-end + 2 Back-end APIs on Azure Container Apps
+# Front-end ASP.NET Core + 2 API back-end sur Azure Container Apps
 
-This repository contains a simple scenario built to demonstrate how ASP.NET Core 6.0 can be used to build a cloud-native application hosted in Azure Container Apps. The repository consists of the following projects and folders:
+Ce dépôt contient un scénario simple construit pour démontrer comment ASP.NET Core 6.0 peut être utilisé pour créer une application cloud-native hébergée dans Azure Container Apps. Le dépôt se compose des éléments suivants :
 
-* Store - A Blazor server project representing the frontend of an online store. The store's UI shows a list of all the products in the store, and their associated inventory status. 
-* Products API - A simple API that generates fake product names using the open-source NuGet package [Bogus](https://github.com/bchavez/Bogus). 
-* Inventory API - A simple API that provides a random number for a given product ID string. The values of each string/integer pair are stored in memory cache so they are consistent between API calls. 
-* Azure folder - contains Azure Bicep files used for creating and configuring all the Azure resources. 
-* GitHub Actions workflow file used to deploy the app using CI/CD. 
+* Store - Un projet serveur Blazor représentant le frontend d'une boutique en ligne. L'interface utilisateur de la boutique affiche une liste de tous les produits de la boutique et leur statut d'inventaire associé.
+* Products API - Une API simple qui génère des noms de produits fictifs en utilisant le package open-source NuGet [Bogus](https://github.com/bchavez/Bogus).
+* Inventory API - Une API simple qui fournit un nombre aléatoire pour un identifiant de produit donné. Les valeurs de chaque paire chaîne/entier sont stockées en cache mémoire pour être cohérentes entre les appels API.
+* Dossier Azure - contient les fichiers Azure Bicep utilisés pour créer et configurer toutes les ressources Azure.
+* Fichier de workflow GitHub Actions utilisé pour déployer l'application en utilisant CI/CD.
 
-## What you'll learn
+## Ce que vous apprendrez
 
-This exercise will introduce you to a variety of concepts, with links to supporting documentation throughout the tutorial. 
+Cet exercice vous présentera une variété de concepts, avec des liens vers la documentation tout au long du tutoriel.
 
 * [Azure Container Apps](https://docs.microsoft.com/azure/container-apps/overview)
 * [GitHub Actions](https://github.com/features/actions)
 * [Azure Container Registry](https://docs.microsoft.com/azure/container-registry/)
 * [Azure Bicep](https://docs.microsoft.com/azure/azure-resource-manager/bicep/overview?tabs=**bicep**)
 
-## Prerequisites
+## Prérequis
 
-You'll need an Azure subscription and a very small set of tools and skills to get started:
+Vous aurez besoin de :
 
-1. An Azure subscription. Sign up [for free](https://azure.microsoft.com/free/).
-2. A GitHub account, with access to GitHub Actions.
-3. Either the [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) installed locally, or, access to [GitHub Codespaces](https://github.com/features/codespaces), which would enable you to do develop in your browser.
+1. Un abonnement Azure.
+2. Un compte GitHub, avec accès à GitHub Actions.
+3. Soit le [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) installé localement, ou bien un accès a Azure Cloud Shell depuis le portal Azure.
 
-## Topology diagram
+## Diagramme de topologie
 
-The resultant application is an Azure Container Environment-hosted set of containers - the `products` API, the `inventory` API, and the `store` Blazor Server front-end.
+L'application est un ensemble 3 conteneurs hébergés dans un environnement Azure Container Apps - l'API `products`, l'API `inventory` et le frontend Blazor Server `store`.
 
 ![Application topology](docs/media/topology.png)
 
-Internet traffic should not be able to directly access either of the back-end APIs as each of these containers is marked as "internal ingress only" during the deployment phase. Internet traffic hitting the `store.<your app>.<your region>.azurecontainerapps.io` URL should be proxied to the `frontend` container, which in turn makes outbound calls to both the `products` and `inventory` APIs within the Azure Container Apps Environment.
+Le trafic Internet ne doit pas pouvoir accéder directement aux API back-end car chacun de ces conteneurs est marqué comme "internal ingress only" pendant la phase de déploiement.
 
-## Setup
+Le trafic Internet accédant à l'URL `store.<your app>.<your region>.azurecontainerapps.io` doit être acheminé vers le conteneur `frontend`, qui à son tour effectue des appels interne, au sein de l'environnement Azure Container Apps, vers les API `products` et `inventory`.
 
-By the end of this section you'll have a 3-node app running in Azure. This setup process consists of two steps, and should take you around 15 minutes. 
+## Configuration
 
-1. Use the Azure CLI to create an Azure Service Principal, then store that principal's JSON output to a GitHub secret so the GitHub Actions CI/CD process can log into your Azure subscription and deploy the code.
-2. Edit the ` deploy.yml` workflow file and push the changes into a new `deploy` branch, triggering GitHub Actions to build the .NET projects into containers and push those containers into a new Azure Container Apps Environment. 
+À la fin de cette section, vous aurez une application contenant 3 nœuds fonctionnant dans Azure Container Apps. 
+Cette application utilise un modèle de deploiement de type `consumption` qui est `serverless`
 
-## Authenticate to Azure and configure the repository with a secret
 
-1. Fork this repository to your own GitHub organization.
-2. Create an Azure Service Principal using the Azure CLI. 
+Ce processus de configuration se compose de deux étapes et devrait vous prendre environ 15 minutes.
+
+1. Utilisez le CLI Azure pour créer `Azure Service Principal`, puis stockez la définition JSON de ce principal dans un secret GitHub afin que le processus CI/CD de GitHub Actions puisse se connecter à votre souscription Azure et déployer le code.
+2. Modifiez le fichier de workflow `deploy.yml` et poussez les modifications dans une nouvelle branche `deploy`, ce qui déclenchera GitHub Actions pour créer l'environnement Container Apps, construire des containers pour les projets .NET  et pousser ces conteneurs l'environnement Container Apps.
+
+## Authentification à Azure et configuration du dépôt avec un secret
+
+1. "Forkez" ce dépôt dans votre propre organisation GitHub.
+2. Créez un `Azure Service Principal` en utilisant le `Azure CLI`.
 
 ```bash
 $subscriptionId=$(az account show --query id --output tsv)
 az ad sp create-for-rbac --sdk-auth --name WebAndApiSample --role owner --scopes /subscriptions/$subscriptionId
 ```
 
-3. Copy the JSON written to the screen to your clipboard. 
+3. Copiez le JSON écrit à l'écran dans votre presse-papiers.
 
 ```json
 {
@@ -67,49 +73,52 @@ az ad sp create-for-rbac --sdk-auth --name WebAndApiSample --role owner --scopes
 }
 ```
 
-4. Create a new GitHub secret in your fork of this repository named `AzureSPN`. Paste the JSON returned from the Azure CLI into this new secret. Once you've done this you'll see the secret in your fork of the repository.
+4. Créez un nouveau secret GitHub dans votre fork nommé `AzureSPN`. Collez le JSON retourné par le CLI Azure dans ce nouveau secret.
 
    ![The AzureSPN secret in GitHub](docs/media/secrets.png)
 
-5. Create a second GitHub secret in your fork of this repository named `AZURE_SUBSCRIPTION_ID`. Provide the specific Azure subscription you want to impact as the value for this secret. Ocne finished, the two secrets' names will show on the page. 
+Créez un deuxième secret GitHub dans votre fork nommé `AZURE_SUBSCRIPTION_ID`. Fournissez l'identifiant de la souscription Azure spécifique que vous souhaitez utiliser comme valeur pour ce secret. 
+Une fois terminé vous verrez les 2 secrets
 
    ![The AzureSPN and subscription id secrets in GitHub](docs/media/secrets2.png)
 
-> Note: Never save the JSON to disk, for it will enable anyone who obtains this JSON code to create or edit resources in your Azure subscription. 
+Remarque : Ne jamais sauvegarder le JSON sur disque, car cela permettrait à quiconque obtenant ce code JSON de créer ou de modifier des ressources dans votre abonnement Azure.!!!
 
-## Deploy the code using GitHub Actions
+## Déployer le code en utilisant GitHub Actions
 
-The easiest way to deploy the code is to make a commit directly to the `deploy` branch. Do this by navigating to the `deploy.yml` file in your browser and clicking the `Edit` button. 
+Le moyen le plus simple de déployer le code est de faire un commit directement dans la branche deploy. Faites-le en naviguant dans le fichier deploy.yml dans votre navigateur et en cliquant sur le bouton Edit.
 
-![Edit the deployment workflow file.](docs/media/edit-the-deploy-file.png)
+![Modifier le fichier de deploiement du workflow.](docs/media/edit-the-deploy-file.png)
 
-Provide a custom resource group name for the app, and then commit the change to a new branch named `deploy`. 
+Fournissez un nom d'environnement personnalisé qui sera utilisé pour le nom de `Resssource Group` Azure , puis validez la modification dans une nouvelle branche nommée `deploy`.
 
-![Create the deploy branch.](docs/media/deploy.png)
+![Créer la branche de déploiement.](docs/media/deploy.png)
 
-Once you click the `Propose changes` button, you'll be in "create a pull request" mode. Don't worry about creating the pull request yet, just click on the `Actions` tab, and you'll see that the deployment CI/CD process has already started. 
+Une fois que vous aurez cliqué sur le bouton `Propose changes`, vous serez en mode "creation d'un pull request". Ne vous inquiétez avec le `pull request` pour le moment, cliquez simplement sur l'onglet Actions, et vous verrez que le déploiement va démarrer...
 
-![Build started.](docs/media/deploy-started.png)
+![Déploiement démarré.](docs/media/deploy-started.png)
 
-When you click into the workflow, you'll see that there are 3 phases the CI/CD will run through:
+Lorsque vous cliquez dans le workflow, vous verrez qu'il y a 3 phases que le CI/CD parcourra :
 
-1. provision - the Azure resources will be created that eventually house your app.
-2. build - the various .NET projects are build into containers and published into the Azure Container Registry instance created during provision.
-3. deploy - once `build` completes, the images are in ACR, so the Azure Container Apps are updated to host the newly-published container images. 
+provision - les ressources Azure seront créées pour héberger votre application.
 
-![Deployment phases.](docs/media/cicd-phases.png)
+build - les différents projets .NET sont construits dans des conteneurs et publiés dans l'instance Azure Container Registry créée pendant la provision.
 
-After a few minutes, all three steps in the workflow will be completed, and each box in the workflow diagram will reflect success. If anything fails, you can click into the individual process step to see the detailed log output. 
+deploy - une fois build terminé, les images sont dans ACR, donc les Azure Container Apps sont mises à jour pour héberger les images de conteneurs nouvellement publiées.
 
-> Note: if you do see any failures or issues, please submit an Issue so we can update the sample. Likewise, if you have ideas that could make it better, feel free to submit a pull request.
 
-![Deployment success.](docs/media/success.png)
+![Phases de déploiement.](docs/media/cicd-phases.png)
 
-With the projects deployed to Azure, you can now test the app to make sure it works. 
+Après quelques minutes, les trois étapes du workflow seront terminées, et chaque étape dans le diagramme du workflow affichera son état d'execution. Si quelque chose échoue, vous pouvez cliquer dans les étapes du processus pour examiner les détails.
 
-## Try the app in Azure
+![Déploiement réussi.](docs/media/success.png)
 
-The `deploy` CI/CD process creates a series of resources in your Azure subscription. These are used primarily for hosting the project code, but there's also a few additional resources that aid with monitoring and observing how the app is running in the deployed environment. 
+Avec les projets déployés sur `Azure Container Apps`, vous pouvez maintenant tester l'application pour vous assurer qu'elle fonctionne.
+
+## Tester l'application dans Azure
+
+Le processus CI/CD deploy crée une série de ressources dans votre abonnement Azure. Celles-ci sont principalement utilisées pour héberger le code du projet, mais il y a également quelques ressources supplémentaires qui aident avec...
+
 | Resource  | Resource Type                                                | Purpose                                                      |
 | --------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | storeai   | Application Insights                                         | This provides telemetry and diagnostic information for when I want to monitor how the app is performing or for when things need troubleshooting. |
@@ -120,16 +129,17 @@ The `deploy` CI/CD process creates a series of resources in your Azure subscript
 | storeacr  | An Azure Container Registry                                  | This is the container registry into which the CI/CD process publishes my application containers when I commit code to the `deploy` branch. From this registry, the containers are pulled and loaded into Azure Container Apps. |
 | storelogs | Log Analytics Workspace                                      | This is where I can perform custom [Kusto](https://docs.microsoft.com/azure/data-explorer/kusto/query/) queries against the application telemetry, and time-sliced views of how the app is performing and scaling over time in the environment. |
 
-The resources are shown here in the Azure portal:
+Les ressources sont montrées ici dans le portail Azure :
 
-![Resources in the portal](docs/media/azure-portal.png)
+![Ressources dans le portail](docs/media/azure-portal.png)
 
-Click on the `store` container app to open it up in the Azure portal. In the `Overview` tab you'll see a URL. 
+Cliquez sur l'application Container Apps `store` pour l'ouvrir dans le portail Azure. Dans l'onglet `Overview`, vous verrez une URL.
 
-![View the store's public URL.](docs/media/get-public-url.png)
+![Voir l'URL publique du store.](docs/media/get-public-url.png)
 
-Clicking that URL will open the app's frontend up in the browser. 
+En cliquant sur cette URL, vous ouvrirez le frontend de l'application dans le navigateur.
 
-![The product list, once the app is running.](docs/media/store-ui.png)
+![La liste des produits, une fois l'application en cours d'exécution.](docs/media/store-ui.png)
 
-You'll see that the first request will take slightly longer than subsequent requests. On the first request to the page, the APIs are called on the server side. The code uses `IMemoryCache` to store the results of the API calls in memory. So, subsequent calls will use the cached payload rather than make live requests each time. 
+Vous verrez que la première demande prendra légèrement plus de temps que les demandes suivantes. Lors de la première demande de la page, les API sont appelées côté serveur. Le code utilise `IMemoryCache`.
+
