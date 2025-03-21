@@ -102,9 +102,7 @@ Lorsque vous cliquez dans le workflow, vous verrez qu'il y a les phases que le C
 
 provision - les ressources Azure seront créées pour héberger votre application.
 
-build - les différents projets .NET sont construits dans des conteneurs et publiés dans l'instance Azure Container Registry créée pendant la provision.
-
-deploy - une fois build terminé, les images sont dans ACR, donc les Azure Container Apps sont mises à jour pour héberger les images de conteneurs nouvellement publiées.
+deploy - les build des différents projets .NET sont réalisés dans des conteneurs et publiés dans l'instance Azure Container Registry créée pendant la provision.une fois build terminé, les images sont dans ACR, et  les Azure Container Apps sont mises à jour pour héberger les images de conteneurs nouvellement publiées.
 
 
 ![Phases de déploiement.](docs/media/cicd-phases.png)
