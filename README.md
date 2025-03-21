@@ -1,11 +1,15 @@
-# Front-end ASP.NET Core + 2 API back-end sur Azure Container Apps
+# Exemple de déploiement dans Azure Container Apps d'une application multi-tiers
+# Front-end ASP.NET Core + 2 API back-end
+# Proposition de "stress test" en fin de lab
 
-Ce dépôt contient un scénario simple construit pour démontrer comment ASP.NET Core 6.0 peut être utilisé pour créer une application cloud-native hébergée dans Azure Container Apps. Le dépôt se compose des éléments suivants :
+Ce dépôt contient un scénario simple construit pour démontrer comment ASP.NET Core 6.0 peut être utilisé pour créer une application cloud-native hébergée dans Azure Container Apps. 
 
-* Store - Un projet serveur Blazor représentant le frontend d'une boutique en ligne. L'interface utilisateur de la boutique affiche une liste de tous les produits de la boutique et leur statut d'inventaire associé.
-* Products API - Une API simple qui génère des noms de produits fictifs en utilisant le package open-source NuGet [Bogus](https://github.com/bchavez/Bogus).
-* Inventory API - Une API simple qui fournit un nombre aléatoire pour un identifiant de produit donné. Les valeurs de chaque paire chaîne/entier sont stockées en cache mémoire pour être cohérentes entre les appels API.
-* Dossier Azure - contient les fichiers Azure Bicep utilisés pour créer et configurer toutes les ressources Azure.
+Le dépôt se compose des éléments suivants :
+
+* `Store` - Un projet serveur Blazor représentant le frontend d'une boutique en ligne. L'interface utilisateur de la boutique affiche une liste de tous les produits de la boutique et leur statut d'inventaire associé.
+* `Products API` - Une API simple qui génère des noms de produits fictifs en utilisant le package open-source NuGet [Bogus](https://github.com/bchavez/Bogus).
+* `Inventory API` - Une API simple qui fournit un nombre aléatoire pour un identifiant de produit donné. Les valeurs de chaque paire chaîne/entier sont stockées en cache mémoire pour être cohérentes entre les appels API.
+* `Dossier Infra` - contient les fichiers Azure Bicep utilisés pour créer et configurer toutes les ressources Azure.
 * Fichier de workflow GitHub Actions utilisé pour déployer l'application en utilisant CI/CD.
 
 ## Ce que vous apprendrez
@@ -49,7 +53,7 @@ Ce processus de configuration se compose de deux étapes et devrait vous prendre
 ## Authentification à Azure et configuration du dépôt avec un secret
 
 1. "Forkez" ce dépôt dans votre propre organisation GitHub.
-2. Créez un `Azure Service Principal` en utilisant le `Azure CLI`.
+2. Créez un `Azure Service Principal` en utilisant `Azure CLI`.
 
 ```bash
 $subscriptionId=$(az account show --query id --output tsv)
@@ -117,15 +121,15 @@ Avec les projets déployés sur `Azure Container Apps`, vous pouvez maintenant t
 
 Le processus CI/CD deploy crée une série de ressources dans votre abonnement Azure. Celles-ci sont principalement utilisées pour héberger le code du projet, mais il y a également quelques ressources supplémentaires qui aident avec...
 
-| Resource  | Resource Type                                                | Purpose                                                      |
-| --------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| storeai   | Application Insights                                         | This provides telemetry and diagnostic information for when I want to monitor how the app is performing or for when things need troubleshooting. |
-| store     | An Azure Container App that houses the code for the front end. | The store app is the store's frontend app, running a Blazor Server project that reaches out to the backend APIs |
-| products  | An Azure Container App that houses the code for a minimal API. | This API is a Swagger UI-enabled API that hands back product names and IDs to callers. |
-| inventory | An Azure Container App that houses the code for a minimal API. | This API is a Swagger UI-enabled API that hands back quantities for product IDs. A client would need to call the `products` API first to get the product ID list, then use those product IDs as parameters to the `inventory` API to get the quantity of any particular item in inventory. |
-| storeenv  | An Azure Container Apps Environment                          | This environment serves as the networking meta-container for all of the instances of all of the container apps comprising the app. |
-| storeacr  | An Azure Container Registry                                  | This is the container registry into which the CI/CD process publishes my application containers when I commit code to the `deploy` branch. From this registry, the containers are pulled and loaded into Azure Container Apps. |
-| storelogs | Log Analytics Workspace                                      | This is where I can perform custom [Kusto](https://docs.microsoft.com/azure/data-explorer/kusto/query/) queries against the application telemetry, and time-sliced views of how the app is performing and scaling over time in the environment. |
+| Resource     | Resource Type                                                | Purpose                                                      |
+| ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| appi-xxx   | Application Insights                                         | Fournit des informations de télémétrie et de diagnostic lorsque permettant de surveiller les performances de l’application ou lorsque des problèmes doivent être résolus. |
+| ca-store     | Azure Container Apps qui héberge le code du serveur frontal. | Store est l’application frontale exécutant un projet Blazor Server qui utilse les API du backend |
+| ca-products  | Azure Container Apps qui héberge le code de l'API product. | C'est une API compatible Swagger qui transmet les noms et les ID des produits aux appelants. |
+| ca-inventory | Azure Container Apps qui héberge le code de l'API inventory. | C'est une API compatible Swagger qui restitue les quantités pour les ID de produit. Un client doit d’abord appeler l’API « products » pour obtenir la liste des ID de produit, puis utiliser ces ID de produit comme paramètres de l’API « stock » pour obtenir la quantité d’un article particulier en stock.|
+| cae-xxx      | Azure Container Apps Environment                          | C'est l'insfrasturcture qui permet aux différentes Containers Apps de s'exécuter. Dans cet example nous utilisons un modème `consumption` `serverless` |
+| crxxxx      | Azure Container Registry                                  | Il s’agit du registre de conteneurs dans lequel le processus CI/CD publie mes conteneurs d’application lorsque je valide le code dans la branche « deploy ». À partir de ce registre, les conteneurs sont extraits et chargés dans Azure Container Apps. |
+| log-xxx     | Log Analytics Workspace                                      | C’est là que je peux effectuer des requêtes [Kusto](https://docs.microsoft.com/azure/data-explorer/kusto/query/) sur les données de télémétries de mon application. |
 
 Les ressources sont montrées ici dans le portail Azure :
 
@@ -141,3 +145,6 @@ En cliquant sur cette URL, vous ouvrirez le frontend de l'application dans le na
 
 Vous verrez que la première demande prendra légèrement plus de temps que les demandes suivantes. Lors de la première demande de la page, les API sont appelées côté serveur. Le code utilise `IMemoryCache`.
 
+## Test de charge avec Azure Load Test
+
+Maintenant nous allons laisser l'nvironnement Github pour aller dans le portail Azure
