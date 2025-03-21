@@ -131,26 +131,15 @@ Le processus CI/CD deploy crée une série de ressources dans votre abonnement A
 
 Les ressources sont montrées ici dans le portail Azure :
 
-Ressources dans le portail
+![Ressources dans le portail](docs/media/azure-portal.png)
 
-Cliquez sur l'application de conteneur store pour l'ouvrir dans le portail Azure. Dans l'onglet Overview, vous verrez une URL.
+Cliquez sur l'application Container Apps `store` pour l'ouvrir dans le portail Azure. Dans l'onglet `Overview`, vous verrez une URL.
 
-Voir l'URL publique du store.
+![Voir l'URL publique du store.](docs/media/get-public-url.png)
 
 En cliquant sur cette URL, vous ouvrirez le frontend de l'application dans le navigateur.
 
-La liste des produits, une fois l'application en cours d'exécution.
+![La liste des produits, une fois l'application en cours d'exécution.](docs/media/store-ui.png)
 
-Vous verrez que la première demande prendra légèrement plus de temps que les demandes suivantes. Lors de la première demande de la page, les API sont appelées côté serveur. Le code utilise IMemoryCache pour...
-
-Code
-
-Vous pouvez trouver le fichier original [ici](https://github.com/stpapaix/demo-aca-4-startups-dotNET-FrontEnd-to-BackEnd-on-Azure-Container-Apps/blob/main/README.md).
-stpapaix/demo-aca-4-startups-dotNET-FrontEnd-to-BackEnd-on-Azure-Container-Apps
-traduit la ligne suivant en francais
-Internet traffic hitting the `store.<your app>.<your region>.azurecontainerapps.io` URL should be proxied to the `frontend` container, which in turn makes outbound calls to both the `products` and `inventory` APIs within the Azure Container Apps Environment.
-Le trafic Internet accédant à l'URL store.<votre app>.<votre région>.azurecontainerapps.io doit être acheminé vers le conteneur frontend, qui à son tour effectue des appels sortants vers les API products et inventory au sein de l'environnement Azure Container Apps.
-
-
-
+Vous verrez que la première demande prendra légèrement plus de temps que les demandes suivantes. Lors de la première demande de la page, les API sont appelées côté serveur. Le code utilise `IMemoryCache`.
 
