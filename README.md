@@ -1,4 +1,4 @@
-# Front-end ASP.NET Core + 2 API back-end sur Azure Container Apps
+# Front-end ASP.NET Core + 2 API back-end sur Azure Container Apps 
 
 Ce dépôt contient un scénario simple construit pour démontrer comment ASP.NET Core 6.0 peut être utilisé pour créer une application cloud-native hébergée dans Azure Container Apps. Le dépôt se compose des éléments suivants :
 
@@ -51,10 +51,51 @@ Ce processus de configuration se compose de deux étapes et devrait vous prendre
 1. "Forkez" ce dépôt dans votre propre organisation GitHub.
 2. Créez un `Azure Service Principal` en utilisant le `Azure CLI`.
 
+Après l'installation d'`Azure CLI`, ouvrez un session bash.  
+
 ```bash
-$subscriptionId=$(az account show --query id --output tsv)
+az login
+```  
+ou bien si necessaire
+```bash
+az login --tenant xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+```  
+
+Vérifiez que vous etes connecté à la bonne souscription:  
+```bash
+az account show
+```  
+Le résultat affichera : 
+
+```json
+{
+  "environmentName": "AzureCloud",
+  "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "isDefault": true,
+  "name": "Nom de l'abonnement",
+  "state": "Enabled",
+  "tenantId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "user": {
+    "name": "votre.email@example.com",
+    "type": "user"
+  }
+}
+```  
+
+Si besoin de changer :   
+```bash
+az account set --subscription "ID ou nom de l'abonnement"
+```  
+
+Capturez le Subscription ID  
+```bash
+subscriptionId=$(az account show --query id --output tsv)
+```  
+Creez le `Service Principal` qui sera stocké dans dans un secret Github et permettra d'excuter les scripts `bicep` de création de ressources dans votre souscription Azure.  
+
+```bash
 az ad sp create-for-rbac --sdk-auth --name WebAndApiSample --role owner --scopes /subscriptions/$subscriptionId
-```
+```  
 
 3. Copiez le JSON écrit à l'écran dans votre presse-papiers.
 
