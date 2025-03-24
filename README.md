@@ -76,11 +76,11 @@ az account show
 
 3. Créez un `Azure Service Principal` en utilisant `Azure CLI`.  
 
-Tout d'abord nous allons crer la varible `$subscription`
+Tout d'abord nous allons créer la variable `$subscription`
 ```bash
-$subscriptionId=$(az account show --query id --output tsv)
+subscriptionId=$(az account show --query id --output tsv)
 ```  
-Et ensuite créer le `Service Principal`
+Et ensuite créer le `Service Principal` dans Entra ID.
 ```bash
 az ad sp create-for-rbac --sdk-auth --name WebAndApiSample --role owner --scopes /subscriptions/$subscriptionId
 ```  
