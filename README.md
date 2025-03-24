@@ -2,6 +2,7 @@
 # Front-end ASP.NET Core + 2 API back-end
 # Proposition de "stress test" en fin de lab
 
+
 Ce dépôt contient un scénario de deploiement d'une application web cloud native sur le service Azure Container Apps.  
 L'application contient un front `store`et 2 service d'API `products` et `inventory`.  
 Les 3 `Containers Apps` repose sur un environnement de type `Consumption Serverless` qui permettra à l'application d'avoir une "scalabilité" totalement managé.  
@@ -90,8 +91,7 @@ Et ensuite créer le `Service Principal` dans Entra ID.
 az ad sp create-for-rbac --sdk-auth --name WebAndApiSample --role owner --scopes /subscriptions/$subscriptionId
 ```  
 
-
-3. Copiez le JSON écrit à l'écran dans votre presse-papiers.  
+3. Copiez le JSON affiché à l'écran dans votre presse-papiers.  
 
 ```json
 {
