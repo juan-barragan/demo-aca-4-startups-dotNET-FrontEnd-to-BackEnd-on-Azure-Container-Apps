@@ -93,7 +93,7 @@ Remarque : Ne jamais sauvegarder le JSON sur disque, car cela permettrait à qui
 
 ## Déployer le code en utilisant GitHub Actions  
 
-Le moyen le plus simple de déployer le code est de faire un commit directement dans la branche deploy. Faites-le en naviguant dans le fichier deploy.yml dans votre navigateur et en cliquant sur le bouton Edit.  
+Le moyen le plus simple de déployer le code est de faire un commit directement dans la branche deploy. Faites-le en naviguant dans le fichier deploy.yml (dans .github\workflows) dans votre navigateur et en cliquant sur le bouton Edit.  
 
 ![Modifier le fichier de deploiement du workflow.](docs/media/edit-the-deploy-file.png)
 
