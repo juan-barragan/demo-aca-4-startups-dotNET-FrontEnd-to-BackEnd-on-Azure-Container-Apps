@@ -145,7 +145,7 @@ En cliquant sur cette URL, vous ouvrirez le frontend de l'application dans le na
 
 Vous verrez que la première demande prendra légèrement plus de temps que les demandes suivantes. Lors de la première demande de la page, les API sont appelées côté serveur. Le code utilise `IMemoryCache`.
 
-## Test de charge avec Azure Load Test
+## Test de charge avec le service Azure Load Testing
 
 Maintenant nous allons laisser l'environnement Github pour aller dans le [Portail Azure](https://portal.azure.com)
 Rendez-vous dans la marketplace Azure pour recherche le service `Azure Load Testing`.
