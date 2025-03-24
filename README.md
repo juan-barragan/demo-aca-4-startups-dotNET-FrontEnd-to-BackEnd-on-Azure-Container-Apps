@@ -56,12 +56,35 @@ Ce processus de configuration se compose de deux étapes et devrait vous prendre
 ## Mise en place de l'Authentification à Azure, Fork et configuration du dépôt avec le rajout des secrets  
 
 1. "Forkez" ce dépôt dans votre propre organisation GitHub.  
-2. Créez un `Azure Service Principal` en utilisant `Azure CLI`.  
+
+2. Connectez vous à Azure (pas necessaire si vous utilisez Azure Portal Cloud Shell
 
 ```bash
+az login
+```    
+
+Si necessaire 
+```bash
+az login --tenant xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+```    
+
+Vérifiez avec 
+```bash
+az account show
+```    
+
+
+3. Créez un `Azure Service Principal` en utilisant `Azure CLI`.  
+
+Tout d'abord nous allons crer la varible `$subscription`
+```bash
 $subscriptionId=$(az account show --query id --output tsv)
+```  
+Et ensuite créer le `Service Principal`
+```bash
 az ad sp create-for-rbac --sdk-auth --name WebAndApiSample --role owner --scopes /subscriptions/$subscriptionId
 ```  
+
 
 3. Copiez le JSON écrit à l'écran dans votre presse-papiers.  
 
