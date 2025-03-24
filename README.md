@@ -29,7 +29,7 @@ Vous aurez besoin de :
 2. Un compte GitHub, avec accès à GitHub Actions.
 3. Soit le [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) installé localement, ou bien un accès a Azure Cloud Shell depuis le portal Azure.
 
-## Diagramme de topologie
+## Diagramme d'architecture fonctionnelle
 
 L'application est un ensemble 3 conteneurs hébergés dans un environnement Azure Container Apps - l'API `products`, l'API `inventory` et le frontend Blazor Server `store`.
 
