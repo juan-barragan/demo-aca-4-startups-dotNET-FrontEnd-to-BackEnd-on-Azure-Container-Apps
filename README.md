@@ -148,3 +148,5 @@ Vous verrez que la première demande prendra légèrement plus de temps que les 
 ## Test de charge avec Azure Load Test
 
 Maintenant nous allons laisser l'nvironnement Github pour aller dans le portail Azure
+
+
