@@ -34,7 +34,7 @@ Cet exercice vous présentera une variété de concepts, avec des liens vers la 
 Vous aurez besoin de :  
 1. Un abonnement Azure.  
 2. Un compte GitHub, avec accès à GitHub Actions.  
-3. Soit le [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) installé localement, ou bien un accès a Azure Cloud Shell depuis le portal Azure.  
+3. [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) installé localement, ou bien un accès a Azure Cloud Shell depuis le portal Azure. 
 
 
 ## Diagramme d'architecture fonctionnelle  
