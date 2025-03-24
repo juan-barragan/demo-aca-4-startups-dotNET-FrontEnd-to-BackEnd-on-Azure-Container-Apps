@@ -131,7 +131,7 @@ Le processus CI/CD deploy crée une série de ressources dans votre abonnement A
 | crxxxx      | Azure Container Registry                                  | Il s’agit du registre de conteneurs dans lequel le processus CI/CD publie mes conteneurs d’application lorsque je valide le code dans la branche « deploy ». À partir de ce registre, les conteneurs sont extraits et chargés dans Azure Container Apps. |
 | log-xxx     | Log Analytics Workspace                                      | C’est là que je peux effectuer des requêtes [Kusto](https://docs.microsoft.com/azure/data-explorer/kusto/query/) sur les données de télémétries de mon application. |
 
-Les ressources sont montrées ici dans le portail Azure :
+Les ressources sont affichées ici dans le portail Azure :
 
 ![Ressources dans le portail](docs/media/azure-portal.png)
 
