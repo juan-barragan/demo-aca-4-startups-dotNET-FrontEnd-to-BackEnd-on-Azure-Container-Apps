@@ -50,7 +50,7 @@ Ce processus de configuration se compose de deux étapes et devrait vous prendre
 1. Utilisez le CLI Azure pour créer `Azure Service Principal`, puis stockez la définition JSON de ce principal dans un secret GitHub afin que le processus CI/CD de GitHub Actions puisse se connecter à votre souscription Azure et déployer le code.
 2. Modifiez le fichier de workflow `deploy.yml` et poussez les modifications dans une nouvelle branche `deploy`, ce qui déclenchera GitHub Actions pour créer l'environnement Container Apps, construire des containers pour les projets .NET  et pousser ces conteneurs l'environnement Container Apps.
 
-## Authentification à Azure et configuration du dépôt avec un secret
+## Mise en place de l'Authentification à Azure, Fork et configuration du dépôt avec le rajout des secrets
 
 1. "Forkez" ce dépôt dans votre propre organisation GitHub.
 2. Créez un `Azure Service Principal` en utilisant `Azure CLI`.
