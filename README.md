@@ -2,7 +2,12 @@
 # Front-end ASP.NET Core + 2 API back-end
 # Proposition de "stress test" en fin de lab
 
-Ce dépôt contient un scénario simple construit pour démontrer comment ASP.NET Core 6.0 peut être utilisé pour créer une application cloud-native hébergée dans Azure Container Apps.  
+Ce dépôt contient un scénario de deploiement d'une application web cloud native sur le service Azure Container Apps.  
+L'application contient un front `store`et 2 service d'API `products` et `inventory`.  
+Les 3 `Containers Apps` repose sur un environnement de type `Consumption Serverless` qui permettra à l'application d'avoir une "scalabilité" totalement managé.  
+
+Dans la dernière étape du lab nous réaliseraons un test de charge pour vous permettre de voir comment s'opére cette "scalabilité" automatique.
+
 
 Le dépôt se compose des éléments suivants :  
 
