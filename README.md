@@ -125,7 +125,7 @@ Le moyen le plus simple de déployer le code est de faire un commit directement 
 
 ![Modifier le fichier de deploiement du workflow.](docs/media/edit-the-deploy-file.png)
 
-Fournissez un nom d'environnement personnalisé qui sera utilisé pour le nom de `Resssource Group` Azure , puis validez la modification dans une nouvelle branche nommée `deploy`.  
+Fournissez un nom d'environnement personnalisé qui sera utilisé pour le nom de `Resssource Group` Azure , puis validez la modification (cliquez sur le bouton "COMMIT CHANGES" dans une nouvelle branche nommée `deploy`.  
 
 ![Créer la branche de déploiement.](docs/media/deploy.png)
 
