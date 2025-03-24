@@ -208,16 +208,19 @@ Idem pour `ca-product` et `ca-inventory` qui vont ensuite redescendre au nombre 
 Vous pouvez revenir sur le service de `Load Testing` pour allez examiner les métriques d'execution du scénario
 
 
-![Observation Test Load 2](docs/media/observation-load-test-2png).
+![Observation Test Load 2](docs/media/observation-load-test-2.png).
+
+Vous pouvez vous amuser à faire varier le nombre d'instance de votre application (`store` pour voir l'impact sur les performances du test).
 
 
-Vous pouvez vous amuser à faire varier le nombre d'instance de votre application (`store` pour voir l'impact sur les performances du test.
+![Observation Test Load 3](docs/media/metrics-run-1.png).
+
+![Observation Test Load 4](docs/media/metrics-run-2.png).
 
 
+# Suppression des ressources.
 
-
-
-
+Une fois les tests terminés pensez à supprimer les ressources en supprimant les 2 Ressources Group (celui de l'application Store Container Apps et celui du Load Testing)
 
 
 
