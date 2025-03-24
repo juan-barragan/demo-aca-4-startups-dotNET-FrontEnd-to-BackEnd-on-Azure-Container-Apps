@@ -158,9 +158,63 @@ Choisir une région (La même région que celle ou a été précédement déploy
 
 ![Creation Azure Load Testing](docs/media/load-testing-creation.png).
 
-Une fois la ressource crée, rendev-vous dans le Ressource Group ou vous trouverez votre service de test de charge.
+Une fois la ressource crée, rendez-vous dans le `Ressource Group` ou vous trouverez votre service de test de charge que vous venez de créer.
 
 ![Panel Azure Load Testing](docs/media/load-testing-panel.png).
+
+Cliquez sur le service Load Tesing affiché
+
+
+![Creation scénario Azure Load Testing](docs/media/Load-testing-creation-1.png).
+
+A partir du service nous allons créer un scenario de test simple basé sur une URL HTTP.
+Cliquez sur `Create by adding HTTPS request` pour lancer la création du scénario de test.
+
+
+![Creation scénario Azure Load Testing etape 1 ](docs/media/Load-testing-creation-2.png).
+
+Veuillez renseigner le nom du test,  sa description ainsi quue les cases à cocher telles que sur la copie d'écran ci-dessus.
+Cliquez ensuite sur next.
+
+
+![Creation scénario Azure Load Testing etape 2 ](docs/media/Load-testing-creation-3.png).
+
+Cliquez sur Add Request et renseignez le Nom de la requête ansi que l'URL de l'application (Celle de l'application Store créée dans l'étape précédente).
+Cliquez ensuite sur  `Add`, puis 2x sur next pour se rendre dans l'écran `Load`
+
+
+![Creation scénario Azure Load Testing etape 3 ](docs/media/Load-testing-creation-4.png).
+
+Dans les paramètre de `Load`, vous pouvez suivre les paramètres proposés.
+Cliquez ensuite sur `Review and Create` et si tout est OK vous pouvez lancer la création.
+Le test sera lancé automatiquement après sa création.
+
+
+![Scale Container Apps 1](docs/media/container-apps-score-config-1.png).
+
+Pendant la création du service vous pouvez aller examiner les paramètres du container Apps `ca-store`
+
+
+![Scale Container Apps 2](docs/media/container-apps-score-config-2.png).
+
+![Scale Container Apps 3](docs/media/container-apps-score-config-3.png).
+
+Et vous pourrez observer la montée en charge rapide des instances qui se fait automatiquement.
+Idem pour `ca-product` et `ca-inventory` qui vont ensuite redescendre au nombre min au bout de 5 min conformément au paramètre `cool down` (merci au cache mémoire).
+
+
+![Observation Test Load 1](docs/media/observation-load-test-1.png).
+
+Vous pouvez revenir sur le service de `Load Testing` pour allez examiner les métriques d'execution du scénario
+
+
+![Observation Test Load 2](docs/media/observation-load-test-2png).
+
+
+Vous pouvez vous amuser à faire varier le nombre d'instance de votre application (`store` pour voir l'impact sur les performances du test.
+
+
+
 
 
 
