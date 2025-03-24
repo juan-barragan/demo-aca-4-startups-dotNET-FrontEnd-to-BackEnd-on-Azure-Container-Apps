@@ -149,7 +149,23 @@ Vous verrez que la première demande prendra légèrement plus de temps que les 
 
 Maintenant nous allons laisser l'environnement Github pour aller dans le [Portail Azure](https://portal.azure.com)
 Rendez-vous dans la marketplace Azure pour recherche le service `Azure Load Testing`.
+
 ![Azure Marketplace](doc/media/azure-marketplace-load-testing.png).
+
+Lancer la creation d'une ressources `Azure Load Testing`: 
+Renseigner le nom d'un Ressource Group Azure.
+Choisir une région (La même région que celle ou a été précédement déployée votre application. Ceci pour éviter des flux de communication inutile entre l'instance de test et celle de Container Apps.
+
+![Creation Azure Load Testing](doc/media/load-testing-creation.png).
+
+Une fois la ressource crée, rendev-vous dans le Ressource Group ou vous trouverez votre service de test de charge.
+
+![Panel Azure Load Testing](doc/media/load-testing-panel.png).
+
+
+
+
+
 
 
 
