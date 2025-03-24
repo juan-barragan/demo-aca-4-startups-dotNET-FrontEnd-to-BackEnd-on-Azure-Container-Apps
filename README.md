@@ -69,7 +69,7 @@ Ce processus de configuration se compose de deux étapes et devrait vous prendre
 az login
 ```    
 
-Si necessaire 
+Dans le cas ou votre utilisateur à accès à plusieurs tenants il peut être necessaire de spécifier le tenant cible.
 ```bash
 az login --tenant xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```    
