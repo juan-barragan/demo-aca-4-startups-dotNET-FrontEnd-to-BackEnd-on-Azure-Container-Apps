@@ -255,6 +255,14 @@ Vous pouvez vous amuser à faire varier le nombre d'instance de votre applicatio
 
 # Suppression des ressources.  
 
-Une fois les tests terminés pensez à supprimer les ressources en supprimant les 2 Ressources Group (celui de l'application Store Container Apps et celui du Load Testing).  
+Une fois les tests terminés pensez à supprimer les ressources en supprimant  
+- les 2 Ressources Group (celui de l'application Store Container Apps et celui du Load Testing).  
+- les 2 secrets créés dans le repo Github
+- le service principal
+
+```bash
+spId=$(az ad sp list --display-name WebAndApiSample --query "[].{id:appId}" --output tsv)
+az ad sp delete --id $spId
+```  
 
 
