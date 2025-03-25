@@ -257,7 +257,7 @@ Vous pouvez vous amuser à faire varier le nombre d'instance de votre applicatio
 
 Une fois les tests terminés pensez à supprimer les ressources en supprimant  
 - les 2 Ressources Group (celui de l'application Store Container Apps et celui du Load Testing).  
-- les 2 secrets créés dans le repo Github
+- les 2 secrets créés dans le repo Github (AZURESPN AZURE_SUBSCRIPTION_ID)
 - le service principal
 
 ```bash
