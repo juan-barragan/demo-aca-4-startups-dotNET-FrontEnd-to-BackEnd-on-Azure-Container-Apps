@@ -225,14 +225,14 @@ Cliquez ensuite sur `Review and Create` et si tout est OK vous pouvez lancer la 
 Le test sera lancé automatiquement après sa création.  
 
 
-![Scale Container Apps 1](docs/media/container-apps-score-config-1.png).  
+![Scale Container Apps 1](docs/media/container-apps-store-config-1.png).  
 
 Pendant la création du service vous pouvez aller examiner les paramètres du container Apps `ca-store`.  
 
 
-![Scale Container Apps 2](docs/media/container-apps-score-config-2.png).  
+![Scale Container Apps 2](docs/media/container-apps-store-config-2.png).  
 
-![Scale Container Apps 3](docs/media/container-apps-score-config-3.png).  
+![Scale Container Apps 3](docs/media/container-apps-store-config-3.png).  
 
 Et vous pourrez observer la montée en charge rapide des instances qui se fait automatiquement.
 Idem pour `ca-product` et `ca-inventory` qui vont ensuite redescendre au nombre min au bout de 5 min conformément au paramètre `cool down` (merci au cache mémoire).
