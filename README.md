@@ -7,7 +7,7 @@ Ce dépôt contient un scénario de deploiement d'une application web cloud nati
 L'application contient un front `store`et 2 service d'API `products` et `inventory`.  
 Les 3 `Containers Apps` repose sur un environnement de type `Consumption Serverless` qui permettra à l'application d'avoir une "scalabilité" totalement managée.  
 
-Dans la dernière étape du lab nous réaliseraons un test de charge pour vous permettre de voir comment s'opére cette "scalabilité" automatique.
+Dans la dernière étape du lab nous réaliserons un test de charge pour vous permettre de voir comment s'opére cette "scalabilité" automatique.
 
 
 Le dépôt se compose des éléments suivants :  
