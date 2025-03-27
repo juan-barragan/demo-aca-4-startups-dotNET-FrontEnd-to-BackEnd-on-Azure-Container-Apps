@@ -20,7 +20,7 @@ jobs:
       AZURE_CREDENTIALS: ${{ secrets.AzureSPN }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       AZURE_ENV_NAME: genAI   # Variable qui sera utilise pour la generation du nom du ressource group et pour tag des ressources
-      AZURE_LOCATION: francecentrale   # Variable qui definie la region de deploiement ie: francecentral,swedencentral,westus,switzerlandnorth,germanywestcentral,spaincentral...
+      AZURE_LOCATION: francecentral   # Variable qui definie la region de deploiement ie: francecentral,swedencentral,westus,switzerlandnorth,germanywestcentral,spaincentral...
 
     steps:
       - name: Checkout
